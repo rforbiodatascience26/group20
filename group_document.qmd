@@ -13,3 +13,10 @@ editor: visual
 ## s263417 - Edu
 
 ## s263506 - Maria
+
+hi
+
+```{r}
+x<- (2+1)
+print(x)
+```
