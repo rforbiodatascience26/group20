@@ -5,3 +5,30 @@ editor: visual
 ---
 
 ## Lab 07 Assignment - Group 20
+
+```{r}
+library(tidyverse)
+library(broom)  # devtools::install_github("tidymodels/broom")
+library(cowplot)
+```
+
+```{r}
+biopsy <- read_csv("https://wilkelab.org/classes/SDS348/data_sets/biopsy.csv")
+```
+
+```{r}
+pca_fit <- biopsy %>% 
+  select(where(is.numeric)) %>% # retain only numeric columns
+  prcomp(scale = TRUE) # do PCA on scaled data
+
+pca_fit
+```
+
+```{r}
+pca_fit <- biopsy %>% 
+  select(where(is.numeric)) %>% # retain only numeric columns
+  scale() %>% # scale data
+  prcomp() # do PCA
+
+pca_fit
+```
