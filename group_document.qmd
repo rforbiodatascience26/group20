@@ -12,4 +12,10 @@ editor: visual
 
 ## s263417 - Edu
 
+Hi guys, I'm hungry
+
+```{r}
+2+2
+```
+
 ## s263506 - Maria
