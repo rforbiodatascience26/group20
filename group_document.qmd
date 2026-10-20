@@ -6,11 +6,28 @@ editor: visual
 
 ## s263488 - Leonor
 
+```{r}
+x <- c(1, 2 , 3)
+print(x)
+```
+
 ## s263484 - Dimitra
 
 ## s263485 - Joana
 
+hiiii you guyssssss
+
+```{r}
+
+```
+
 ## s263417 - Edu
+
+Hi guys, I'm hungry
+
+```{r}
+2+2
+```
 
 ## s263506 - Maria
 
