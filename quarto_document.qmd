@@ -15,6 +15,12 @@ print(x)
 
 ## Edu
 
+im still hungry :P
+
+```{r}
+2+2
+```
+
 ## Maria
 
 ## Dimitra
