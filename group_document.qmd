@@ -10,6 +10,12 @@ editor: visual
 
 ## s263485 - Joana
 
+hiiii you guyssssss
+
+```{r}
+
+```
+
 ## s263417 - Edu
 
 ## s263506 - Maria
