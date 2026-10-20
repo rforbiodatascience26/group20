@@ -21,6 +21,14 @@ im still hungry :P
 2+2
 ```
 
+### New analysis
+
+After further analysis, I can say I'm still hungry
+
+```{r}
+2+3
+```
+
 ## Maria
 
 hi
