@@ -8,9 +8,5 @@ Top 10 Bio Data Science Languages of ALL Time:
 4. has
 3. different
 2. tastes
-<<<<<<< HEAD
 1. python
 
-=======
-1. Pythnjhvgv
->>>>>>> 154d0f985fb0e4c1556f993249c3f6d54b890bd9
