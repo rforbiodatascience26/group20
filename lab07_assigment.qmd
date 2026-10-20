@@ -32,3 +32,13 @@ pca_fit <- biopsy %>%
 
 pca_fit
 ```
+
+## PLOT 1 - Maria
+
+## PLOT 2 - Dimitra
+
+## PLOT 3 - Joana
+
+## PLOT 4 - Leonor
+
+## PLOT 5 - Edu
