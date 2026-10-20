@@ -1,0 +1,15 @@
+---
+title: "group_document.qmd"
+format: html
+editor: visual
+---
+
+## s263488 - Leonor
+
+## s263484 - Dimitra
+
+## s263485 - Joana
+
+## s263417 - Edu
+
+## s263506 - Maria
