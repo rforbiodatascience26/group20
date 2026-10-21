@@ -41,6 +41,44 @@ pca_fit
 
 ## PLOT 3 - Joana
 
+### Proportion Plots of Malignancy by Feature Score
+
+This plot represents how the share of malignant tumors changes as each biopsy feature’s score increases from 1 to 10, giving insights of how does every feature is associated with the risk of a tumor being malignant.
+
+```{r}
+biopsy |>
+  pivot_longer(-outcome, names_to = "feature", values_to = "score") |>
+  group_by(feature, score) |>
+  summarise(pct_malignant = mean(outcome == "malignant"), n_patients = n(), .groups = "drop") |>
+  
+  ggplot(aes
+      (x = score, 
+       y = pct_malignant)) +
+  geom_line(color = "#8B8682") +
+  geom_point(aes(size = n_patients, color = n_patients), alpha = 0.90) +
+  scale_color_gradientn(
+  colours = c("#FFD700", "#FF7F00", "#EE4000", "#CD0000", "#8B0000"),
+  limits = c(100, 500), oob = scales::squish,
+  name = "Number of Patients") +
+  guides(color = guide_legend(), size = guide_legend()) +
+  facet_wrap(~feature) +   
+  scale_x_continuous(breaks = 1:10) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  
+  labs(title = "Percentage of observed malignancy at each score for each feature",
+       y = "% malignant", size = "Number of Patients") +
+  theme_minimal(11) +
+  theme(
+    legend.key.size = unit(0.5, "cm"),
+    legend.text = element_text(size = 9),
+    legend.title = element_text(size = 10)
+  )
+```
+
+#### Analysis
+
+As we can see, in all nine plots, the percentage of observed malignant tumors generally increases with the score, though the point where we start to see this trend differs by feature, for example for the "mitoses" feature, a low score includes a significant percentage of malignant tumors, but if we look at "clump thickness", this share starts rising at a much higher score. Finally, most patients have low scores, so percentages at high scores are based on few patients.
+
 ## PLOT 4 - Leonor
 
 ## Principal Component Analysis Biplot
