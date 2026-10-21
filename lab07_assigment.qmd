@@ -42,9 +42,10 @@ pca_fit
 ## PLOT 3 - Joana
 
 ## PLOT 4 - Leonor
+
 ## Principal Component Analysis Biplot
 
-To visualize the relationships between the original numeric attributes and the principal components, we construct a PCA biplot using the \`factoextra\` package. This plot projects the observations onto the first two principal components (PC_1 and PC_2) while displaying the feature loading vectors to indicate how each variable contributes to the components. The samples are grouped by their true diagnostic status (\`benign\` vs. \`malignant\`) with 95% confidence ellipses to illustrate class separation.
+To visualize the relationships between the original numeric attributes and the principal components, we construct a PCA biplot using the *factoextra* package. This plot projects the observations onto the first two principal components (PC_1 and PC_2) while displaying the feature loading vectors to indicate how each variable contributes to the components. The samples are grouped by their true diagnostic status (benign vs. malignant) with 95% confidence ellipses to illustrate class separation.
 
 ```{r}
 biopsy_clean <- biopsy |> 
@@ -69,7 +70,6 @@ fviz_pca_biplot(
     plot.caption = element_text(hjust = 0, size = 8, color = "gray30")
   )
 ```
-
 
 ## PLOT 5 - Edu
 
