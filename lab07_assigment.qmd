@@ -10,6 +10,8 @@ editor: visual
 library(tidyverse)
 library(broom)  # devtools::install_github("tidymodels/broom")
 library(cowplot)
+library(ggplot2) 
+library(factoextra)
 ```
 
 ```{r}
@@ -37,24 +39,65 @@ pca_fit
 
 ## PLOT 2 - Dimitra
 
-```{r}
-library(ggcorrplot)
-
-biopsy_data <- biopsy |> 
-  select(where(is.numeric))
-corr_matrix <- cor(biopsy_data)
-ggcorrplot(corr_matrix,
-           hc.order = TRUE,
-           type = "lower",
-           lab = TRUE,
-           lab_size = 3, 
-           title = "Correlation Between the Biopsy Variables",
-           legend.title = "Correlation") +
-  labs(caption = "Data from the Wisconsin Breast Cancer Database") 
-```
-
 ## PLOT 3 - Joana
 
 ## PLOT 4 - Leonor
 
+## Principal Component Analysis Biplot
+
+To visualize the relationships between the original numeric attributes and the principal components, we construct a PCA biplot using the *factoextra* package. This plot projects the observations onto the first two principal components (PC_1 and PC_2) while displaying the feature loading vectors to indicate how each variable contributes to the components. The samples are grouped by their true diagnostic status (benign vs. malignant) with 95% confidence ellipses to illustrate class separation.
+
+```{r}
+biopsy_clean <- biopsy |> 
+  drop_na()
+
+fviz_pca_biplot(
+  pca_fit,
+  geom.ind = "point",
+  col.ind = biopsy_clean$outcome,
+  palette = "jco",
+  addEllipses = TRUE,
+  ellipse.level = 0.95,
+  col.var = "black",
+  repel = TRUE,
+  legend.title = "Outcome"
+) +
+  theme_minimal() +
+  labs(title = "PCA Plot for Biopsy Data",
+       caption = "Plot Design from \nhttps://www.r-bloggers.com/2026/06/pca-in-r-principal-component-analysis-step-by-step-prcomp-ggplot2/#google_vignette",
+       subtitle = "Projection of samples and feature loadings onto PC1 and PC2") +
+  theme(
+    plot.caption = element_text(hjust = 0, size = 8, color = "gray30")
+  )
+```
+
 ## PLOT 5 - Edu
+
+### Ridge Density Plots of all features
+
+```{r}
+library(ggridges)
+```
+
+```{r}
+biopsy |> 
+  pivot_longer(cols = -outcome, names_to = "feature", values_to = "value") |> 
+  
+  ggplot(aes(x = value,
+             y = feature,
+             fill = outcome)) +
+  
+  geom_density_ridges(alpha = 0.5) +
+  
+  theme_ridges() + 
+  
+  labs(title = "Ridge Density Plots of all features",
+       subtitle = "Divided by tumor expression outcome",
+       x = "Values (0-10)",
+       y = "Feature",
+       fill = "Outcome")
+```
+
+**Analysis:** It's possible to see that malignant and benign cells are very different.
+
+Some features can even be used as strong predictors of malignancy, like *uniform_cell_size, bare_nuclei,* and *uniform_cell_shape,* as these features exhibit sharp differences between the two possible outcomes.

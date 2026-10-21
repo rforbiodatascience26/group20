@@ -13,6 +13,12 @@ x <- c(1, 2, 3)
 print(x)
 ```
 
+### New Feature
+
+hi again
+
+:)
+
 ## Edu
 
 im still hungry :P
@@ -21,9 +27,23 @@ im still hungry :P
 2+2
 ```
 
+### New analysis
+
+After further analysis, I can say I'm still hungry
+
+```{r}
+2+3
+```
+
 ## Maria
 
 hi
+
+```{r}
+
+```
+
+New feature
 
 ```{r}
 
@@ -46,3 +66,5 @@ how are you ????
 hope you are welllll
 
 kissesss
+
+### New feature
