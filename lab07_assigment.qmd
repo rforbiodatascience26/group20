@@ -37,6 +37,10 @@ pca_fit
 
 ## PLOT 2 - Dimitra
 
+### Correlation Matrix of the Biopsy Variables
+
+Before running PCA, visualizing the correlation matrix of the variables, using the ggcorrplot package, will check if they are related to each other. Only the lower triangle is shown because the matrix is symmetric and similar variables are grouped together.
+
 ```{r}
 library(ggcorrplot)
 
@@ -52,6 +56,10 @@ ggcorrplot(corr_matrix,
            legend.title = "Correlation") +
   labs(caption = "Data from the Wisconsin Breast Cancer Database") 
 ```
+
+### **Analysis**
+
+All correlations are positive, with the strongest one between uniform cell size and uniform cell shape. This shows that these two variables carry almost the same information. Mitoses shows the weakest correlations with the other variables. This confirms that PCA is a suitable method for this data.
 
 ## PLOT 3 - Joana
 
