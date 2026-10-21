@@ -13,12 +13,26 @@ x <- c(1, 2, 3)
 print(x)
 ```
 
+### New Feature
+
+hi again
+
+:)
+
 ## Edu
 
 im still hungry :P
 
 ```{r}
 2+2
+```
+
+### New analysis
+
+After further analysis, I can say I'm still hungry
+
+```{r}
+2+3
 ```
 
 ## Maria
@@ -29,9 +43,19 @@ hi
 
 ```
 
+New feature
+
+```{r}
+
+```
+
 ## Dimitra
 
 hi guys i hate the server
+
+```{r}
+## New Analysis
+```
 
 ## Joana
 

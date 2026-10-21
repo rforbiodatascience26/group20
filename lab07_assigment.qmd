@@ -10,6 +10,8 @@ editor: visual
 library(tidyverse)
 library(broom)  # devtools::install_github("tidymodels/broom")
 library(cowplot)
+library(ggplot2) 
+library(factoextra)
 ```
 
 ```{r}
@@ -39,45 +41,63 @@ pca_fit
 
 ## PLOT 3 - Joana
 
-### Proportion Plots of Malignancy by Feature Score
+## PLOT 4 - Leonor
 
-This plot represents how the share of malignant tumors changes as each biopsy feature’s score increases from 1 to 10, giving insights of how does every feature is associated with the risk of a tumor being malignant.
+## Principal Component Analysis Biplot
+
+To visualize the relationships between the original numeric attributes and the principal components, we construct a PCA biplot using the *factoextra* package. This plot projects the observations onto the first two principal components (PC_1 and PC_2) while displaying the feature loading vectors to indicate how each variable contributes to the components. The samples are grouped by their true diagnostic status (benign vs. malignant) with 95% confidence ellipses to illustrate class separation.
 
 ```{r}
- 
-biopsy |>
-  pivot_longer(-outcome, names_to = "feature", values_to = "score") |>
-  group_by(feature, score) |>
-  summarise(pct_malignant = mean(outcome == "malignant"), n_patients = n(), .groups = "drop") |>
-  
-  ggplot(aes
-      (x = score, 
-       y = pct_malignant)) +
-  geom_line(color = "#8B8682") +
-  geom_point(aes(size = n_patients, color = n_patients), alpha = 0.90) +
-  scale_color_gradientn(
-  colours = c("#FFD700", "#FF7F00", "#EE4000", "#CD0000", "#8B0000"),
-  limits = c(100, 500), oob = scales::squish,
-  name = "Number of Patients") +
-  guides(color = guide_legend(), size = guide_legend()) +
-  facet_wrap(~feature) +   
-  scale_x_continuous(breaks = 1:10) +
-  scale_y_continuous(labels = scales::percent_format()) +
-  
-  labs(title = "Percentage of observed malignancy at each score for each feature",
-       y = "% malignant", size = "Number of Patients") +
-  theme_minimal(11) +
+biopsy_clean <- biopsy |> 
+  drop_na()
+
+fviz_pca_biplot(
+  pca_fit,
+  geom.ind = "point",
+  col.ind = biopsy_clean$outcome,
+  palette = "jco",
+  addEllipses = TRUE,
+  ellipse.level = 0.95,
+  col.var = "black",
+  repel = TRUE,
+  legend.title = "Outcome"
+) +
+  theme_minimal() +
+  labs(title = "PCA Plot for Biopsy Data",
+       caption = "Plot Design from \nhttps://www.r-bloggers.com/2026/06/pca-in-r-principal-component-analysis-step-by-step-prcomp-ggplot2/#google_vignette",
+       subtitle = "Projection of samples and feature loadings onto PC1 and PC2") +
   theme(
-    legend.key.size = unit(0.5, "cm"),
-    legend.text = element_text(size = 9),
-    legend.title = element_text(size = 10)
+    plot.caption = element_text(hjust = 0, size = 8, color = "gray30")
   )
 ```
 
-#### Analysis
-
-As we can see, in all nine plots, the percentage of observed malignant tumors generally increases with the score, though the point where we start to see this trend differs by feature, for example for the "mitoses" feature, a low score includes a significant percentage of malignant tumors, but if we look at "clump thickness", this share starts rising at a much higher score. Finally, most patients have low scores, so percentages at high scores are based on few patients.
-
-## PLOT 4 - Leonor
-
 ## PLOT 5 - Edu
+
+### Ridge Density Plots of all features
+
+```{r}
+library(ggridges)
+```
+
+```{r}
+biopsy |> 
+  pivot_longer(cols = -outcome, names_to = "feature", values_to = "value") |> 
+  
+  ggplot(aes(x = value,
+             y = feature,
+             fill = outcome)) +
+  
+  geom_density_ridges(alpha = 0.5) +
+  
+  theme_ridges() + 
+  
+  labs(title = "Ridge Density Plots of all features",
+       subtitle = "Divided by tumor expression outcome",
+       x = "Values (0-10)",
+       y = "Feature",
+       fill = "Outcome")
+```
+
+**Analysis:** It's possible to see that malignant and benign cells are very different.
+
+Some features can even be used as strong predictors of malignancy, like *uniform_cell_size, bare_nuclei,* and *uniform_cell_shape,* as these features exhibit sharp differences between the two possible outcomes.
