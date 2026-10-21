@@ -85,6 +85,8 @@ All correlations are positive, with the strongest being between uniform cell siz
 
 ## PLOT 3 - Joana
 
+### Proportion Plots of Malignancy by Feature Score
+
 This plot represents how the share of malignant tumors changes as each biopsy feature’s score increases from 1 to 10, giving insights of how does every feature is associated with the risk of a tumor being malignant.
 
 ```{r}
