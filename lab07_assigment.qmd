@@ -35,6 +35,10 @@ pca_fit
 
 ## PLOT 1 - Maria
 
+### PCA and clump thickness
+
+This plot shows the observations projected onto the first two principal components, with the color representing the clump thickness score
+
 ```{r}
 pca_fit |>
   broom::augment(biopsy) |>
@@ -52,6 +56,10 @@ pca_fit |>
   theme_half_open(12) +
   background_grid()
 ```
+
+#### Analysis
+
+The PCA scatterplot shows the observations using PC1 and PC2. The points are coloured by clump thickness, allowing us to see how this variable relates to the main variation in the dataset.We can see that higher clump thickness values tend to be found more on one side of PC1, while lower values are mostly on the other side.
 
 ## PLOT 2 - Dimitra
 
