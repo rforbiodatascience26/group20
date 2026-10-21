@@ -57,7 +57,7 @@ pca_fit |>
 
 ## PLOT 2 - Dimitra
 
-### Correlation Matrix of the Biopsy Variables 
+### Correlation Matrix of the Biopsy Variables
 
 Before running PCA, visualizing the correlation matrix of the variables, using the ggcorrplot, will check if the variables are related to each other. Only the lower triangle is shown because the matrix is symmetric and similar variables are grouped together.
 
