@@ -125,9 +125,9 @@ As we can see, in all nine plots, the percentage of observed malignant tumors ge
 
 ## PLOT 4 - Leonor
 
-## Principal Component Analysis Biplot
+### Principal Component Analysis Biplot
 
-To visualize the relationships between the original numeric attributes and the principal components, we construct a PCA biplot using the *factoextra* package. This plot projects the observations onto the first two principal components (PC_1 and PC_2) while displaying the feature loading vectors to indicate how each variable contributes to the components. The samples are grouped by their true diagnostic status (benign vs. malignant) with 95% confidence ellipses to illustrate class separation.
+To investigate the multivariate relationships among biopsy samples, we constructed a PCA biplot using the factoextra package. The plot maps the observations onto the first two principal components (PC_1 and PC_2) and displays feature loading vectors to show how each attribute contributes to sample variance. Observations are grouped by diagnostic status (benign vs. malignant) with 95% confidence ellipses.
 
 ```{r}
 biopsy_clean <- biopsy |> 
@@ -152,6 +152,10 @@ fviz_pca_biplot(
     plot.caption = element_text(hjust = 0, size = 8, color = "gray30")
   )
 ```
+
+#### Analysis
+
+The PCA biplot clearly separates benign and malignant tumors along PC_1 (65.5% variance). Benign samples cluster tightly on the right, malignant ones spread out on the left. All feature vectors point toward malignant tumors, with most cellular traits driving PC_1 and mitoses standing out along PC_2 (8.6% variance).
 
 ## PLOT 5 - Edu
 
