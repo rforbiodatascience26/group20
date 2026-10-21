@@ -42,7 +42,6 @@ pca_fit
 ## PLOT 3 - Joana
 
 ## PLOT 4 - Leonor
-
 ## Principal Component Analysis Biplot
 
 To visualize the relationships between the original numeric attributes and the principal components, we construct a PCA biplot using the \`factoextra\` package. This plot projects the observations onto the first two principal components (PC_1 and PC_2) while displaying the feature loading vectors to indicate how each variable contributes to the components. The samples are grouped by their true diagnostic status (\`benign\` vs. \`malignant\`) with 95% confidence ellipses to illustrate class separation.
@@ -71,4 +70,34 @@ fviz_pca_biplot(
   )
 ```
 
+
 ## PLOT 5 - Edu
+
+### Ridge Density Plots of all features
+
+```{r}
+library(ggridges)
+```
+
+```{r}
+biopsy |> 
+  pivot_longer(cols = -outcome, names_to = "feature", values_to = "value") |> 
+  
+  ggplot(aes(x = value,
+             y = feature,
+             fill = outcome)) +
+  
+  geom_density_ridges(alpha = 0.5) +
+  
+  theme_ridges() + 
+  
+  labs(title = "Ridge Density Plots of all features",
+       subtitle = "Divided by tumor expression outcome",
+       x = "Values (0-10)",
+       y = "Feature",
+       fill = "Outcome")
+```
+
+**Analysis:** It's possible to see that malignant and benign cells are very different.
+
+Some features can even be used as strong predictors of malignancy, like *uniform_cell_size, bare_nuclei,* and *uniform_cell_shape,* as these features exhibit sharp differences between the two possible outcomes.
