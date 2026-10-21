@@ -10,6 +10,8 @@ editor: visual
 library(tidyverse)
 library(broom)  # devtools::install_github("tidymodels/broom")
 library(cowplot)
+library(ggplot2) 
+library(factoextra)
 ```
 
 ```{r}
@@ -40,6 +42,34 @@ pca_fit
 ## PLOT 3 - Joana
 
 ## PLOT 4 - Leonor
+## Principal Component Analysis Biplot
+
+To visualize the relationships between the original numeric attributes and the principal components, we construct a PCA biplot using the \`factoextra\` package. This plot projects the observations onto the first two principal components (PC_1 and PC_2) while displaying the feature loading vectors to indicate how each variable contributes to the components. The samples are grouped by their true diagnostic status (\`benign\` vs. \`malignant\`) with 95% confidence ellipses to illustrate class separation.
+
+```{r}
+biopsy_clean <- biopsy |> 
+  drop_na()
+
+fviz_pca_biplot(
+  pca_fit,
+  geom.ind = "point",
+  col.ind = biopsy_clean$outcome,
+  palette = "jco",
+  addEllipses = TRUE,
+  ellipse.level = 0.95,
+  col.var = "black",
+  repel = TRUE,
+  legend.title = "Outcome"
+) +
+  theme_minimal() +
+  labs(title = "PCA Plot for Biopsy Data",
+       caption = "Plot Design from \nhttps://www.r-bloggers.com/2026/06/pca-in-r-principal-component-analysis-step-by-step-prcomp-ggplot2/#google_vignette",
+       subtitle = "Projection of samples and feature loadings onto PC1 and PC2") +
+  theme(
+    plot.caption = element_text(hjust = 0, size = 8, color = "gray30")
+  )
+```
+
 
 ## PLOT 5 - Edu
 
