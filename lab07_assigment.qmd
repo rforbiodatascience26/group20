@@ -1,0 +1,60 @@
+---
+title: "lab07_assignment"
+format: html
+editor: visual
+---
+
+## Lab 07 Assignment - Group 20
+
+```{r}
+library(tidyverse)
+library(broom)  # devtools::install_github("tidymodels/broom")
+library(cowplot)
+```
+
+```{r}
+biopsy <- read_csv("https://wilkelab.org/classes/SDS348/data_sets/biopsy.csv")
+```
+
+```{r}
+pca_fit <- biopsy %>% 
+  select(where(is.numeric)) %>% # retain only numeric columns
+  prcomp(scale = TRUE) # do PCA on scaled data
+
+pca_fit
+```
+
+```{r}
+pca_fit <- biopsy %>% 
+  select(where(is.numeric)) %>% # retain only numeric columns
+  scale() %>% # scale data
+  prcomp() # do PCA
+
+pca_fit
+```
+
+## PLOT 1 - Maria
+
+## PLOT 2 - Dimitra
+
+```{r}
+library(ggcorrplot)
+
+biopsy_data <- biopsy |> 
+  select(where(is.numeric))
+corr_matrix <- cor(biopsy_data)
+ggcorrplot(corr_matrix,
+           hc.order = TRUE,
+           type = "lower",
+           lab = TRUE,
+           lab_size = 3, 
+           title = "Correlation Between the Biopsy Variables",
+           legend.title = "Correlation") +
+  labs(caption = "Data from the Wisconsin Breast Cancer Database") 
+```
+
+## PLOT 3 - Joana
+
+## PLOT 4 - Leonor
+
+## PLOT 5 - Edu
