@@ -35,6 +35,24 @@ pca_fit
 
 ## PLOT 1 - Maria
 
+```{r}
+pca_fit |>
+  broom::augment(biopsy) |>
+  ggplot(aes(
+    x = .fittedPC1,
+    y = .fittedPC2,
+    color = clump_thickness
+  )) +
+  geom_point(size = 1.5, alpha = 0.7) +
+  labs(
+    x = "PC1",
+    y = "PC2",
+    color = "Clump thickness"
+  ) +
+  theme_half_open(12) +
+  background_grid()
+```
+
 ## PLOT 2 - Dimitra
 
 ## PLOT 3 - Joana
