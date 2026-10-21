@@ -57,9 +57,33 @@ pca_fit |>
 
 ## PLOT 2 - Dimitra
 
-## PLOT 3 - Joana
+### Correlation Matrix of the Biopsy Variables 
 
-### Proportion Plots of Malignancy by Feature Score
+Before running PCA, visualizing the correlation matrix of the variables, using the ggcorrplot, will check if they are related to each other. Only the lower triangle is shown because the matrix is symmetric and similar variables are grouped together.
+
+```{r}
+library(ggcorrplot)
+
+biopsy_data <- biopsy |> 
+  select(where(is.numeric))
+
+corr_matrix <- cor(biopsy_data)
+
+ggcorrplot(corr_matrix,
+           hc.order = TRUE,
+           type = "lower",
+           lab = TRUE,
+           lab_size = 3, 
+           title = "Correlation of Biopsy Variables",
+           legend.title = "Correlation") +
+  labs(caption = "Data from the Wisconsin Breast Cancer Database")
+```
+
+### Analysis
+
+All correlations are positive, with the strongest being between uniform cell size and uniform cell shape. This shows that these two variables carry almost the same information. Mitoses has the weakest correlations with all the other variables. This redudancy confirms that PCA is a suitable method for this data.
+
+## PLOT 3 - Joana
 
 This plot represents how the share of malignant tumors changes as each biopsy feature’s score increases from 1 to 10, giving insights of how does every feature is associated with the risk of a tumor being malignant.
 
